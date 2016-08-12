@@ -12,7 +12,7 @@ Quickly post and view notes on the same network e.g. save a note from a Linux PC
 
 The focus is simplicity - browser display and search, with a log-in to add, edit, and delete notes.
 
-The log-in offers basic protection from unauthorised tampering via password obfuscation and session timeout. Noter was created for an isolated network where plain text transfer and viewing is acceptable, and without determined adversaries. *Noter is **not** suitable for storing sensitive data.*
+The log-in offers basic protection from unauthorised tampering via password obfuscation and session timeout. Noter was created for an isolated network where plain text transfer and viewing is acceptable, and without determined adversaries. *Noter is NOT suitable for storing sensitive data.*
 
 A single SQLite database file facilitates easy backup and / or source control of data.
 
@@ -50,7 +50,7 @@ Check the configuration file constants: *config/config.php*
 
 Only the timezone, session constants, and `CONFIG_NUM_NOTES_DISPLAYED` are of immediate interest, unless you wish to revise the SQLite database schema.
 
-Change the users and passwords in the editing log-in gateway (*classes/login.class.php*). The default usernames (`USER1` and `USER2`) are *martin* and *alison* and both passwords are *P@55w0rd*.  More users can be easily added (top of the file and in `validateForm()`).
+Change the users and passwords in the editing log-in gateway (*classes/login.class.php*). The default usernames (`USER1` and `USER2`) are *martin* and *alison*, and both passwords are *P@55w0rd*.  More users can be easily added (top of the file and in `validateForm()`).
 
 Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a hash generated from a web service or by command-line scripting:
 
@@ -67,7 +67,7 @@ Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a
 
 *http://localhost/notes*
 
-*http://<IP>/notes*
+*http://IP_addr/notes*
 
 or better, configure an Apache vhost:
 
@@ -94,7 +94,7 @@ Unsuccessful log-in attempts are recorded in *log/badlog.txt*
 
 ### Credits
 
-Angel Marin and Paul Johnston for the JavaScript SHA-256 hash implementation used.
+Angel Marin and Paul Johnston for the JavaScript SHA-256 hash function.
 
 
 ### Miscellaneous
