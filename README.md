@@ -30,6 +30,8 @@ For the following example on a Linux machine, the chosen directory is called *no
 
 (XAMPP and WAMP are suitable servers for Windows.)
 
+On the terminal:
+
 `cd` to the web directory (usually */var/www/html/*).
 
 (Prefix `sudo` to the following commands as necessary.)
@@ -63,6 +65,25 @@ Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a
 `import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())`
 
 
+### Manually Create the SQLite Database
+
+Noter includes an initial SQLite database: *db/noter.sqlite3*
+
+However, where GitHub importing does not permit binary files and this file is consequently missing, the SQLite file will need to be created manually -
+
+On the terminal:
+
+`cd db/`
+
+`sudo sqlite3 noter.sqlite3`
+
+`.read noter_schema_data.sql`
+
+`.exit`
+
+`sudo chown www-data:www-data noter.sqlite3`
+
+
 ## Viewing and Searching
 
 *http://localhost/notes*
@@ -87,7 +108,9 @@ Upon logging-in through this page, notes can be added, updated, or deleted.
 
 ## Other Files
 
-The SQLite database schema is available at *db/schema.sql*
+The SQLite database schema is available at *db/noter\_schema.sql*
+
+The SQLite database schema and initial data is available at *db/noter\_schema\_data.sql*
 
 Unsuccessful log-in attempts are recorded in *log/badlog.txt*
 
