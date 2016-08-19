@@ -38,7 +38,7 @@ On the terminal:
 
 `chown -R <username>:www-data notes/` # Debian-based, username as owner allows file editing
 
-(`chown -R <username>:apache notes/`   # others)
+(`chown -R <username>:apache notes/` # others)
 
 `chown www-data notes/log/badlog.txt`
 
@@ -52,7 +52,7 @@ Check the configuration file constants: *config/config.php*
 
 Only the timezone, session constants, and `CONFIG_NUM_NOTES_DISPLAYED` are of immediate interest, unless you wish to revise the SQLite database schema.
 
-Change the users and passwords in the editing log-in gateway (*classes/login.class.php*). The default usernames (`USER1` and `USER2`) are *martin* and *alison*, and both passwords are *P@55w0rd*.  More users can be easily added (top of the file and in `validateForm()`).
+Change the users and passwords in the editing log-in gateway (*classes/login.class.php*). The default usernames (`USER1` and `USER2`) are *martin* and *alison*, and both passwords are *P@55w0rd*. More users can be easily added (top of the file and in `validateForm()`).
 
 Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a hash generated from a web service or by command-line scripting:
 
@@ -104,6 +104,8 @@ or if Apache rewrite is disabled:
 *http://localhost/notes/edit.php*
 
 Upon logging-in through this page, notes can be added, updated, or deleted.
+
+`<pre>...</pre>` tags preserve whitespace for code snippets.
 
 
 ## Other Files

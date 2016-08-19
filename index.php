@@ -6,19 +6,22 @@ require('classes/sqlitefunc.class.php');
 require('classes/helpers.class.php');
 #########################################
 
+session_start();
 
 require('includes/head.php');
 
 ?>
 
-<h1><a href="index.php" id="index">Noter</a></h1>
+		<h1 id="indextitle">
+			<a href="index.php" id="index">Noter</a>
+			<a href="<?php echo (isset($_SESSION['sVerifiedName'])) ? 'menu.php' : 'edit.php'; ?>" id="edit">&#9998;</a>
+		</h1>
 
 <?php
 Helpers::outputSearchForm();
 ?>
 
-<div id="linecont">
-
+		<div id="linecont">
 
 <?php
 
@@ -42,7 +45,7 @@ else {
 
 ?>
 
-</div>
+		</div>
 
 <?php
 

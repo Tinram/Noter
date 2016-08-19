@@ -13,29 +13,28 @@ require('includes/head.php');
 
 ?>
 
-<h1><a href="index.php">Add</a></h1>
+		<h1><a href="index.php">Add</a></h1>
 
-<div id="faddcont">
+		<div id="faddcont">
 
-	<form action="<?php echo Helpers::selfSafe(); ?>" method="post">
+			<form action="<?php echo Helpers::selfSafe(); ?>" method="post">
 
-		<div>
-			<label for="title">Title</label>
-			<input type="text" name="title" id="title" maxlength="<?php echo CONFIG_MAX_TITLE_LEN; ?>">
+				<div>
+					<label for="title">title</label>
+					<input type="text" name="title" id="title" maxlength="<?php echo CONFIG_MAX_TITLE_LEN; ?>">
+				</div>
+
+				<div id="tacont">
+					<label for="body">note</label>
+					<textarea id="body" name="body" cols="80" rows="2" maxlength="<?php echo CONFIG_MAX_BODY_LEN; ?>"></textarea>
+				</div>
+
+				<input type="hidden" name="add_flag">
+				<input type="submit" value="add">
+
+			</form>
+
 		</div>
-
-		<div id="tacont">
-			<label for="body">Note</label>
-			<textarea id="body" name="body" cols="80" rows="2" maxlength="<?php echo CONFIG_MAX_BODY_LEN; ?>"></textarea>
-		</div>
-
-		<input type="hidden" name="add_flag">
-		<input type="submit" value="add">
-
-	</form>
-
-</div>
-
 
 <?php
 

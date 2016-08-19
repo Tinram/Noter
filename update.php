@@ -13,7 +13,7 @@ require('includes/head.php');
 
 ?>
 
-<h1><a href="index.php">Update</a></h1>
+		<h1><a href="index.php">Update</a></h1>
 
 <?php
 
@@ -21,7 +21,7 @@ Helpers::outputSearchForm();
 
 ?>
 
-<div id="fupdatecont">
+		<div id="fupdatecont">
 
 <?php
 
@@ -55,7 +55,7 @@ else if (isset($_POST['edit_flag'])) {
 
 ?>
 
-</div>
+		</div>
 
 <?php
 

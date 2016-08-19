@@ -83,8 +83,8 @@ class Helpers {
 			<form id="fs" method="post" action="<?php echo self::selfSafe(); ?>">
 
 				<div>
-					<input type="submit" value="search" id="searchbut">
 					<input type="text" name="term" id="term" maxlength="<?php echo CONFIG_MAX_TITLE_LEN; ?>" placeholder="search">
+					<input type="submit" value="search" id="searchbut">
 				</div>
 
 				<div id="radiocont">
@@ -154,6 +154,7 @@ class Helpers {
 
 	/**
 		* Sanitize strings from most (not all) XSS.
+		* Preserve <pre> tags for code whitespace.
 		*
 		* @param   string $sTainted
 		* 
@@ -162,7 +163,9 @@ class Helpers {
 
 	public static function webSafe($sTainted) {
 
-		return htmlentities(strip_tags(trim($sTainted)), ENT_QUOTES, self::ENCODING);
+		$sClean = htmlentities(strip_tags(trim($sTainted), '<pre>'), ENT_QUOTES, self::ENCODING);
+
+		return html_entity_decode($sClean);
 }
 
 

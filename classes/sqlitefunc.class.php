@@ -7,7 +7,7 @@ final class SQLiteFunc extends SQLA {
 		* 
 		* @author         Martin Latter <copysense.co.uk>
 		* @copyright      Martin Latter 03/04/15
-		* @version        0.3
+		* @version        0.31
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git
 	*/
@@ -312,9 +312,9 @@ final class SQLiteFunc extends SQLA {
 		while ($aRow = $rResult->fetchArray()) {
 
 			$sOut .= '
-				<div class="rde">' . Helpers::webSafe($aRow['title']) . '</div>
-				<div class="ren">' . Helpers::webSafe($aRow['body']) . '</div>
-				<div class="ts">' . $aRow['timestamp'] . '</div>';
+			<div class="rde">' . Helpers::webSafe($aRow['title']) . '</div>
+			<div class="ren">' . Helpers::webSafe($aRow['body']) . '</div>
+			<div class="ts">' . $aRow['timestamp'] . '</div>';
 		}
 
 		return $sOut;
