@@ -16,10 +16,15 @@ The log-in offers basic protection from unauthorised tampering via password obfu
 
 A single SQLite database file facilitates easy backup and / or source control of data.
 
+A Raspberry Pi, with Apache and PHP installed, could make an ideal low-powered always-on host for Noter.
+
 
 ## Requirements
 
-A PHP 5.4+ server with the sqlite3 module enabled.
+A PHP 5.4+ server with the following PHP modules enabled:
+
++ php5-mcrypt
++ php5-sqlite
 
 
 ## Setup
