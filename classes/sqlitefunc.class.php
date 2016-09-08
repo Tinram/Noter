@@ -309,7 +309,7 @@ final class SQLiteFunc extends SQLA {
 
 		$rResult = $this->query($sQuery);
 
-		while ($aRow = $rResult->fetchArray()) {
+		while ($aRow = $rResult->fetchArray(SQLITE3_ASSOC)) {
 
 			$sOut .= '
 			<div class="rde">' . Helpers::webSafe($aRow['title']) . '</div>
