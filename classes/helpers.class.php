@@ -9,7 +9,7 @@ class Helpers {
 		* Class wrapper for static helper methods.
 		* 
 		* @author         Martin Latter <copysense.co.uk>
-		* @copyright      Martin Latter 03/04/15
+		* @copyright      Martin Latter 03/04/2015
 		* @version        0.3
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git

@@ -2,9 +2,12 @@
 CREATE TABLE notes (
 
 	id					INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-	title				CHAR(20)					NOT NULL DEFAULT (''),
+	title				CHAR(30)					NOT NULL DEFAULT (''),
 	body				VARCHAR(512)			NOT NULL DEFAULT (''),
-	timestamp 	DATETIME					NOT NULL DEFAULT (DATETIME('now', 'localtime'))
+	creator			CHAR(16)					NOT NULL DEFAULT (''),
+	create_ts		DATETIME					NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+	updater			CHAR(16)					NOT NULL DEFAULT (''),
+	update_ts		DATETIME					DEFAULT NULL
 
 );
 

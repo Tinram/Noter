@@ -12,7 +12,7 @@ final class LoginGateway {
 		* Key hash obfuscation: no encryption needed, but lacks key-strengthening.
 		*
 		* @author            Martin Latter <copysense.co.uk>
-		* @copyright         Martin Latter 11/07/12
+		* @copyright         Martin Latter 11/07/2012
 		* @version           1.07
 		* @license           GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link              https://github.com/Tinram/noter.git

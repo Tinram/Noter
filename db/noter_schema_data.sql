@@ -11,16 +11,19 @@
 CREATE TABLE notes (
 
 	id					INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-	title				CHAR(20)					NOT NULL DEFAULT (''),
+	title				CHAR(30)					NOT NULL DEFAULT (''),
 	body				VARCHAR(512)			NOT NULL DEFAULT (''),
-	timestamp 	DATETIME					NOT NULL DEFAULT (DATETIME('now', 'localtime'))
+	creator			CHAR(16)					NOT NULL DEFAULT (''),
+	create_ts		DATETIME					NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+	updater			CHAR(16)					NOT NULL DEFAULT (''),
+	update_ts		DATETIME					DEFAULT NULL
 
 );
 
 
-INSERT INTO [notes] ([id], [title], [body], [timestamp]) VALUES (1, 'test', 'This is a test note.', '2016-08-12 11:59:50');
-INSERT INTO [notes] ([id], [title], [body], [timestamp]) VALUES (2, 'code snippet #1', 'mcrypt_create_iv($iLength, MCRYPT_DEV_URANDOM);', '2016-08-12 12:00:48');
-INSERT INTO [notes] ([id], [title], [body], [timestamp]) VALUES (3, 'Unicode test', '▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡ ◢◣◤◥◦◧◨◩◪◫◬◭◮◯◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿☀☁☂☃☄★☆☇☈☉☊☋☌☍☎☏☐☑☒☓☔☕☖☗☘ ☙☚☛☜☝☞☟☠☡☢☣☤☥☦☧☨☩☪☫☬☭☮☯☸☹☺☻☼☽☾☿♀♁♂♃♄♅♆♇♈♉♊♋♌♍♎♏♐♑♒♓♔♕♖♗ ♘♙♚♛♜♝♞♟♠♡♢♣♤♥♦♧♨♩♪♫♬♭♮♯♰♱♲♳♴♵♶♷♸♹♺♻♼♽♾♿⚀⚁⚂⚃⚄⚅⚆⚇⚈⚉⚐⚑⚒⚓⚔⚕⚖ ⚗⚘⚙⚚⚛⚜⚝⚠⚡⚢⚣⚤⚥⚦⚧⚨⚩⚪⚫⚬⚭⚮⚯⚰⚱⚲⚳⚴⚵⚶⚷⚸⚹⚺⚻⚼⛀⛁⛂⛃✁✂✃✄✆✇✈✉✌✍✎✏✐', '2016-08-12 21:48:28');
+INSERT INTO [notes] ([id], [title], [body], [creator], [create_ts]) VALUES (1, 'test', 'This is a test note.', 'system', DATETIME('now', 'localtime'));
+INSERT INTO [notes] ([id], [title], [body], [creator], [create_ts]) VALUES (2, 'code snippet', '<pre>mcrypt_create_iv($iLength, MCRYPT_DEV_URANDOM);</pre>', 'system', DATETIME('now', 'localtime'));
+INSERT INTO [notes] ([id], [title], [body], [creator], [create_ts]) VALUES (3, 'Unicode test', '▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡ ◢◣◤◥◦◧◨◩◪◫◬◭◮◯◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿☀☁☂☃☄★☆☇☈☉☊☋☌☍☎☏☐☑☒☓☔☕☖☗☘ ☙☚☛☜☝☞☟☠☡☢☣☤☥☦☧☨☩☪☫☬☭☮☯☸☹☺☻☼☽☾☿♀♁♂♃♄♅♆♇♈♉♊♋♌♍♎♏♐♑♒♓♔♕♖♗ ♘♙♚♛♜♝♞♟♠♡♢♣♤♥♦♧♨♩♪♫♬♭♮♯♰♱♲♳♴♵♶♷♸♹♺♻♼♽♾♿⚀⚁⚂⚃⚄⚅⚆⚇⚈⚉⚐⚑⚒⚓⚔⚕⚖ ⚗⚘⚙⚚⚛⚜⚝⚠⚡⚢⚣⚤⚥⚦⚧⚨⚩⚪⚫⚬⚭⚮⚯⚰⚱⚲⚳⚴⚵⚶⚷⚸⚹⚺⚻⚼⛀⛁⛂⛃✁✂✃✄✆✇✈✉✌✍✎✏✐', 'system', DATETIME('now', 'localtime'));
 
 
 -- Index: idx_title

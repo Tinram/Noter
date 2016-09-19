@@ -6,8 +6,8 @@ final class SQLiteFunc extends SQLA {
 		* SQLite application functionality.
 		* 
 		* @author         Martin Latter <copysense.co.uk>
-		* @copyright      Martin Latter 03/04/15
-		* @version        0.31
+		* @copyright      Martin Latter 03/04/2015
+		* @version        0.32
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git
 	*/
@@ -32,13 +32,13 @@ final class SQLiteFunc extends SQLA {
 
 		$sMode = ($sChoice === 'title') ? 'title' : 'body';
 
-		$aPairs = $this->searchProcessor($sKeywords, $sMode);
+		$aNotes = $this->searchProcessor($sKeywords, $sMode);
 
-		if ( ! $aPairs) {
+		if ( ! $aNotes) {
 			return [ FALSE, 'No results found.' ];
 		}
 		else {
-			return [ TRUE, $this->generateHTML($aPairs, $sAction) ];
+			return [ TRUE, $this->generateHTML($aNotes, $sAction) ];
 		}
 
 	} # end search()
@@ -50,7 +50,7 @@ final class SQLiteFunc extends SQLA {
 		* @param   string $sKeywords, search terms
 		* @param   string $sMode, title or body column search
 		*
-		* @return  boolean false (no results) or array result pairs
+		* @return  boolean false (no results) or array of note row data
 	*/
 
 	private function searchProcessor($sKeywords, $sMode) {
@@ -58,7 +58,7 @@ final class SQLiteFunc extends SQLA {
 		$aResults = [];
 
 		$sQuery = '
-			SELECT id, title, body, timestamp
+			SELECT id, title, body, creator, create_ts, updater, update_ts
 			FROM ' . $this->sTableName . '
 			WHERE ' . $sMode . ' LIKE :term';
 
@@ -68,7 +68,7 @@ final class SQLiteFunc extends SQLA {
 		$rResult = $oStmt->execute();
 
 		while ($aRow = $rResult->fetchArray(SQLITE3_ASSOC)) {
-			$aResults[] = [ 'id' => $aRow['id'], 'title' => $aRow['title'], 'body' => $aRow['body'], 'timestamp' => $aRow['timestamp'] ];
+			$aResults[] = [ 'id' => $aRow['id'], 'title' => $aRow['title'], 'body' => $aRow['body'], 'creator' => $aRow['creator'], 'create_ts' => $aRow['create_ts'], 'updater' => $aRow['updater'], 'update_ts' => $aRow['update_ts'] ];
 		}
 
 		$rResult->finalize();
@@ -88,24 +88,29 @@ final class SQLiteFunc extends SQLA {
 	/**
 		* Generate results HTML.
 		*
-		* @param   array $aPairs, title-body note data
-		* @param   boolean $bUpdate, toggle for update.php page functionality
+		* @param   array $aNotes, note row data
+		* @param   boolean $sAction, toggle for update.php page functionality
 		*
 		* @return  string, HTML
 	*/
 
-	private function generateHTML(array $aPairs, $sAction = '') {
+	private function generateHTML(array $aNotes, $sAction = '') {
 
 		$sOut = '';
 
 		if (empty($sAction)) {
 
-			foreach ($aPairs as $aPair) {
+			foreach ($aNotes as $aNote) {
 
 				$sOut .= '
-				<div class="rde">' . Helpers::webSafe($aPair['title']) . '</div>
-				<div class="ren">' . Helpers::webSafe($aPair['body']) . '</div>
-				<div class="ts">' . $aPair['timestamp'] . '</div>';
+				<div class="rde">' . Helpers::webSafe($aNote['title']) . '</div>
+				<div class="ren">' . Helpers::webSafe($aNote['body']) . '</div>
+				<div class="ts">' . $aNote['create_ts'] . ' by ' . $aNote['creator'] . '</div>';
+
+				if ( ! is_null($aNote['update_ts'])) {
+					$sOut .= '
+				<div class="ts">last update: ' . $aNote['update_ts'] . ' by ' . $aNote['updater'] . '</div>';
+				}
 			}
 		}
 		else {
@@ -116,15 +121,15 @@ final class SQLiteFunc extends SQLA {
 					<span id="update_note_heading">note</span>
 				</div>';
 
-			foreach ($aPairs as $aPair) {
+			foreach ($aNotes as $aNote) {
 
 				$sOut .= '
 				<form class="fupdate" action="' . Helpers::selfSafe() . '" method="post">
 					<div>
-						<input type="text" name="title" id="update_title" value="' . $aPair['title'] . '" maxlength="' . $this->iMaxTitleLen . '">
-						<textarea name="body" maxlength="' . $this->iMaxBodyLen . '" cols="80" rows="2">' . $aPair['body'] . '</textarea>
+						<input type="text" name="title" id="update_title" value="' . $aNote['title'] . '" maxlength="' . $this->iMaxTitleLen . '">
+						<textarea name="body" maxlength="' . $this->iMaxBodyLen . '" cols="80" rows="2">' . $aNote['body'] . '</textarea>
 						<input type="hidden" name="edit_flag">
-						<input type="hidden" name="id" value="' . $aPair['id'] . '">
+						<input type="hidden" name="id" value="' . $aNote['id'] . '">
 						<input type="submit" class="updatebut" value="' . ($sAction === 'update' ? 'update' : 'delete'). '">
 					</div>
 				</form>';
@@ -182,12 +187,13 @@ final class SQLiteFunc extends SQLA {
 
 		$sInsert = '
 			INSERT INTO ' . $this->sTableName . '
-			(title, body)
-			VALUES (:ti, :bd)';
+			(title, body, creator)
+			VALUES (:ti, :bd, :cr)';
 
 		$oStmt = $this->prepare($sInsert);
 		$oStmt->bindValue(':ti', trim($sTitle), SQLITE3_TEXT);
 		$oStmt->bindValue(':bd', trim($sBody), SQLITE3_TEXT);
+		$oStmt->bindValue(':cr', $_SESSION['sVerifiedName'], SQLITE3_TEXT);
 		$rResult = $oStmt->execute();
 
 		if ($rResult) {
@@ -233,13 +239,16 @@ final class SQLiteFunc extends SQLA {
 		$sUpdate = '
 			UPDATE ' . $this->sTableName . '
 			SET 
-				title=:ti,
-				body=:bd
-			WHERE id=:id';
+				title = :ti,
+				body = :bd,
+				updater = :ud,
+				update_ts = DATETIME("now", "localtime")
+			WHERE id = :id';
 
 		$oStmt = $this->prepare($sUpdate);
 		$oStmt->bindValue(':ti', trim($sTitle), SQLITE3_TEXT);
 		$oStmt->bindValue(':bd', trim($sBody), SQLITE3_TEXT);
+		$oStmt->bindValue(':ud', $_SESSION['sVerifiedName'], SQLITE3_TEXT);
 		$oStmt->bindValue(':id', $iID, SQLITE3_INTEGER);
 		$rResult = $oStmt->execute();
 
@@ -275,7 +284,7 @@ final class SQLiteFunc extends SQLA {
 
 		$sDelete = '
 			DELETE FROM ' . $this->sTableName . '
-			WHERE id=:id';
+			WHERE id = :id';
 
 		$oStmt = $this->prepare($sDelete);
 		$oStmt->bindValue(':id', $iID, SQLITE3_INTEGER);
@@ -302,7 +311,7 @@ final class SQLiteFunc extends SQLA {
 		$sOut = '';
 
 		$sQuery = '
-			SELECT title, body, timestamp
+			SELECT title, body, creator, create_ts, updater, update_ts
 			FROM ' . $this->sTableName . '
 			ORDER BY id DESC
 			LIMIT ' . $this->iNumNotesDisplayed;
@@ -314,7 +323,12 @@ final class SQLiteFunc extends SQLA {
 			$sOut .= '
 			<div class="rde">' . Helpers::webSafe($aRow['title']) . '</div>
 			<div class="ren">' . Helpers::webSafe($aRow['body']) . '</div>
-			<div class="ts">' . $aRow['timestamp'] . '</div>';
+			<div class="ts">' . $aRow['create_ts'] . ' by ' . $aRow['creator'] . '</div>';
+
+			if ( ! is_null($aRow['update_ts'])) {
+				$sOut .= '
+				<div class="ts">last update: ' . $aRow['update_ts'] . ' by ' . $aRow['updater'] . '</div>';
+			}
 		}
 
 		return $sOut;

@@ -9,8 +9,8 @@ abstract class SQLA extends SQLite3 {
 		* SQLite database access class.
 		* 
 		* @author         Martin Latter <copysense.co.uk>
-		* @copyright      Martin Latter 31/03/15
-		* @version        0.2
+		* @copyright      Martin Latter 31/03/2015
+		* @version        0.21
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git
 	*/
@@ -45,7 +45,7 @@ abstract class SQLA extends SQLite3 {
 			$this->open($this->sDB);
 		}
 		else {
-			die(__METHOD__ . ': .sqlite file not found');
+			die('<p class="error">' . __METHOD__ . '() &ndash; <em>' . CONFIG_DATABASE . '</em> file not found!</p>');
 		}
 	}
 

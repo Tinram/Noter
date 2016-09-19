@@ -5,7 +5,7 @@
 */
 
 html * {margin:0; padding:0;}
-body {font:0.83em verdana,arial,sans-serif; background:#fff; color:#000; margin:3em 4em 4em 4em;}
+body {font:0.83em verdana,arial,helvetica,freesans,sans-serif; background:#fff; color:#000; margin:3em 4em 4em 4em;}
 
 h1 {margin:20px 0; font-size:1.1em;}
 h1#indextitle {position:relative;}
@@ -37,7 +37,7 @@ input#searchbut {width:60px; position:relative; top:-5px; margin-left:2px; float
 /* output */
 div#linecont {clear:both;}
 div.rde {font-size:1.2em; margin:0 0 4px 0;}
-div.ren {font-size:1.0em; color:#666; margin:0 0 20px 0;}
+div.ren {font-size:1.0em; color:#444; margin:0 0 20px 0;}
 div.ts {font-size:0.7em; color:#999; margin:-16px 0 20px 0;}
 
 /* add */
