@@ -13,7 +13,7 @@ require('includes/head.php');
 ?>
 
 		<h1 id="indextitle">
-			<a href="index.php" id="index">Noter</a>
+			<a href="index.php" id="index"><?php echo CONFIG_APP_NAME; ?></a>
 			<a href="<?php echo (isset($_SESSION['sVerifiedName'])) ? 'menu.php' : 'edit.php'; ?>" id="edit">&#9998;</a>
 		</h1>
 
@@ -21,7 +21,7 @@ require('includes/head.php');
 Helpers::outputSearchForm();
 ?>
 
-		<div id="linecont">
+		<div id="notecont">
 
 <?php
 

@@ -7,10 +7,10 @@ class Helpers {
 
 	/**
 		* Class wrapper for static helper methods.
-		* 
+		*
 		* @author         Martin Latter <copysense.co.uk>
 		* @copyright      Martin Latter 03/04/2015
-		* @version        0.3
+		* @version        0.31
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git
 */
@@ -154,16 +154,16 @@ class Helpers {
 
 	/**
 		* Sanitize strings from most (not all) XSS.
-		* Preserve <pre> tags for code whitespace.
+		* Preserve <pre> and <code> tags.
 		*
 		* @param   string $sTainted
-		* 
+		*
 		* @return  string
 	*/
 
 	public static function webSafe($sTainted) {
 
-		$sClean = htmlentities(strip_tags(trim($sTainted), '<pre>'), ENT_QUOTES, self::ENCODING);
+		$sClean = htmlentities(strip_tags(trim($sTainted), '<pre><code>'), ENT_QUOTES, self::ENCODING);
 
 		return html_entity_decode($sClean);
 }

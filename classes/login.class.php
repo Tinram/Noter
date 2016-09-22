@@ -7,13 +7,13 @@ final class LoginGateway {
 
 	/**
 		* Simple log-in gateway.
-		* 
+		*
 		* Circumvents the need on simple systems for a MySQL DB.
 		* Key hash obfuscation: no encryption needed, but lacks key-strengthening.
 		*
 		* @author            Martin Latter <copysense.co.uk>
 		* @copyright         Martin Latter 11/07/2012
-		* @version           1.07
+		* @version           1.08
 		* @license           GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link              https://github.com/Tinram/noter.git
 */
@@ -34,7 +34,7 @@ final class LoginGateway {
 		HASH = CONFIG_HASH;
 
 
-	private 
+	private
 
 		$USER1_PASS = 'fd74bdd901857b89f5737e5352a2a8a2d1f000aa4bed4aee47c95afaa37d0f99', # SHA-256
 		$USER2_PASS = 'fd74bdd901857b89f5737e5352a2a8a2d1f000aa4bed4aee47c95afaa37d0f99',
@@ -143,7 +143,7 @@ final class LoginGateway {
 		];
 
 		if ( ! array_key_exists($sUserName, $aCredentials)) {
-			$aErrors[] = 'Please enter a valid username and password.'; 
+			$aErrors[] = 'Please enter a valid username and password.';
 		}
 		else {
 
@@ -219,7 +219,7 @@ final class LoginGateway {
 
 		<?php
 			if ( ! empty($aErrors)) {
-				echo '<p class="error">' . join('\n', $aErrors) . '</p>';
+				echo '<p class="error">' . join("\n", $aErrors) . '</p>';
 			}
 		?>
 

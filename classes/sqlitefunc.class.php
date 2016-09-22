@@ -4,10 +4,10 @@ final class SQLiteFunc extends SQLA {
 
 	/**
 		* SQLite application functionality.
-		* 
+		*
 		* @author         Martin Latter <copysense.co.uk>
 		* @copyright      Martin Latter 03/04/2015
-		* @version        0.32
+		* @version        0.33
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git
 	*/
@@ -103,36 +103,36 @@ final class SQLiteFunc extends SQLA {
 			foreach ($aNotes as $aNote) {
 
 				$sOut .= '
-				<div class="rde">' . Helpers::webSafe($aNote['title']) . '</div>
-				<div class="ren">' . Helpers::webSafe($aNote['body']) . '</div>
-				<div class="ts">' . $aNote['create_ts'] . ' by ' . $aNote['creator'] . '</div>';
+				<div class="ntitle">' . Helpers::webSafe($aNote['title']) . '</div>
+				<div class="nbody">' . Helpers::webSafe($aNote['body']) . '</div>
+				<div class="nts">' . $aNote['create_ts'] . ' by ' . $aNote['creator'] . '</div>';
 
 				if ( ! is_null($aNote['update_ts'])) {
 					$sOut .= '
-				<div class="ts">last update: ' . $aNote['update_ts'] . ' by ' . $aNote['updater'] . '</div>';
+				<div class="nts">last update: ' . $aNote['update_ts'] . ' by ' . $aNote['updater'] . '</div>';
 				}
 			}
 		}
 		else {
 
 			echo '
-				<div>
-					<span>title</span>
-					<span id="update_note_heading">note</span>
-				</div>';
+			<div>
+				<span>title</span>
+				<span id="update_note_heading">note</span>
+			</div>';
 
 			foreach ($aNotes as $aNote) {
 
 				$sOut .= '
-				<form class="fupdate" action="' . Helpers::selfSafe() . '" method="post">
-					<div>
-						<input type="text" name="title" id="update_title" value="' . $aNote['title'] . '" maxlength="' . $this->iMaxTitleLen . '">
-						<textarea name="body" maxlength="' . $this->iMaxBodyLen . '" cols="80" rows="2">' . $aNote['body'] . '</textarea>
-						<input type="hidden" name="edit_flag">
-						<input type="hidden" name="id" value="' . $aNote['id'] . '">
-						<input type="submit" class="updatebut" value="' . ($sAction === 'update' ? 'update' : 'delete'). '">
-					</div>
-				</form>';
+			<form class="fupdate" action="' . Helpers::selfSafe() . '" method="post">
+				<div>
+					<input type="text" name="title" id="update_title" value="' . $aNote['title'] . '" maxlength="' . $this->iMaxTitleLen . '">
+					<textarea name="body" maxlength="' . $this->iMaxBodyLen . '" cols="80" rows="2">' . $aNote['body'] . '</textarea>
+					<input type="hidden" name="edit_flag">
+					<input type="hidden" name="id" value="' . $aNote['id'] . '">
+					<input type="submit" class="updatebut" value="' . ($sAction === 'update' ? 'update' : 'delete'). '">
+				</div>
+			</form>';
 
 				# no Helpers::webSafe() on values above so that web code can be edited - it's an XSS issue, remaining in the editing form fields - adjust for your purposes
 			}
@@ -321,13 +321,13 @@ final class SQLiteFunc extends SQLA {
 		while ($aRow = $rResult->fetchArray(SQLITE3_ASSOC)) {
 
 			$sOut .= '
-			<div class="rde">' . Helpers::webSafe($aRow['title']) . '</div>
-			<div class="ren">' . Helpers::webSafe($aRow['body']) . '</div>
-			<div class="ts">' . $aRow['create_ts'] . ' by ' . $aRow['creator'] . '</div>';
+			<div class="ntitle">' . Helpers::webSafe($aRow['title']) . '</div>
+			<div class="nbody">' . Helpers::webSafe($aRow['body']) . '</div>
+			<div class="nts">' . $aRow['create_ts'] . ' by ' . $aRow['creator'] . '</div>';
 
 			if ( ! is_null($aRow['update_ts'])) {
 				$sOut .= '
-				<div class="ts">last update: ' . $aRow['update_ts'] . ' by ' . $aRow['updater'] . '</div>';
+				<div class="nts">last update: ' . $aRow['update_ts'] . ' by ' . $aRow['updater'] . '</div>';
 			}
 		}
 

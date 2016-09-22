@@ -69,6 +69,10 @@ Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a
 
 `import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())`
 
+*Bash*
+
+`echo -n 'PASSWORD' | sha256sum`
+
 
 ### Manually Create the SQLite Database
 

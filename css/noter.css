@@ -17,7 +17,7 @@ a#edit {font-size:12px; font-weight:normal; position:absolute; top:2px; left:54p
 a#edit:hover {text-decoration:none;}
 
 /* form containers */
-div#fsearchcont {width:250px; margin:0 150px 25px 0; float:left;}
+div#fsearchcont {width:250px; margin:0 150px 30px 0; float:left;}
 div#faddcont {width:700px;}
 div#fupdatecont {}
 
@@ -28,17 +28,18 @@ form label#searchlabel {}
 div#radiocont {float:right; margin-right:80px;}
 div#radiocont label {float:none; font-size:11px; margin:0 3px 0 8px; position:relative; top:-8px;}
 div#radiocont input {float:none;}
-form input, textarea {font:1.0em verdana,arial,sans-serif; float:right; border:1px solid #ccc; border-radius:5px; background:#d5b4b4; padding:2px; background:linear-gradient(to top, #d5b4b4, #ffffff 80%); height:20px;}
+form input, textarea {font:1.0em verdana,arial,helvetica,freesans,sans-serif; float:right; border:1px solid #ccc; border-radius:5px; background:#d5b4b4; padding:2px; background:linear-gradient(to top, #d5b4b4, #ffffff 80%); height:20px;}
 input[type="submit"] {color:#444; background:#f7ffff; font-weight:bold; text-align:center; margin-top:5px; padding-bottom:2px; height:26px; background:linear-gradient(to bottom, #ffffff, #d5b4b4 100%);}
 input[type="submit"]:hover {background:#966; color:#fff; cursor:pointer;}
+input::-moz-focus-inner {border:0;}
 input#term {float:left;}
 input#searchbut {width:60px; position:relative; top:-5px; margin-left:2px; float:right;}
 
 /* output */
-div#linecont {clear:both;}
-div.rde {font-size:1.2em; margin:0 0 4px 0;}
-div.ren {font-size:1.0em; color:#444; margin:0 0 20px 0;}
-div.ts {font-size:0.7em; color:#999; margin:-16px 0 20px 0;}
+div#notecont {clear:both;}
+div.ntitle {font-size:1.2em; margin:0 0 4px 0;}
+div.nbody {font-size:1.0em; color:#444; margin:0 0 20px 0;}
+div.nts {font-size:0.7em; color:#999; margin:-16px 0 20px 0;}
 
 /* add */
 div#faddcont {margin:0 0 50px 0;}
@@ -49,10 +50,10 @@ div#faddcont input[type="submit"] {width:60px;}
 
 /* update and delete forms */
 div#fupdatecont {margin-top:60px; clear:both;}
-span#update_note_heading {margin-left:152px;}
+span#update_note_heading {margin-left:202px;}
 form.fupdate {width:870px; margin:0 0 5px 0;}
 form.fupdate input, form.fupdate textarea {float:left; width:375px; margin-right:6px;}
-form.fupdate input#update_title {width:160px;}
+form.fupdate input#update_title {width:215px;}
 form.fupdate input.updatebut {width:80px !important; position:relative; top:-5px;}
 
 /* messages */

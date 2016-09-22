@@ -7,7 +7,7 @@ abstract class SQLA extends SQLite3 {
 
 	/**
 		* SQLite database access class.
-		* 
+		*
 		* @author         Martin Latter <copysense.co.uk>
 		* @copyright      Martin Latter 31/03/2015
 		* @version        0.21
