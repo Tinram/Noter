@@ -29,45 +29,47 @@ A PHP 5.4+ server with the following PHP modules enabled:
 
 ## Setup
 
-Unzip or git clone the Noter files into the chosen directory inside a server's web directory.
-
-For the following example on a Linux machine, the chosen directory is called *notes/*
+Unzip or git clone the Noter files into the chosen web server directory.
 
 (XAMPP and WAMP are suitable servers for Windows.)
 
-On the terminal:
+For the following example on a Linux machine, the chosen directory is called *noter/*
+
+In the terminal:
 
 `cd` to the web directory (usually */var/www/html/*).
 
 (Prefix `sudo` to the following commands as necessary.)
 
-`chown -R <username>:www-data notes/` # Debian-based, username as owner allows file editing
+`chown -R <username>:www-data noter/` # Debian-based, username as owner allows file editing
 
-(`chown -R <username>:apache notes/` # others)
+(`chown -R <username>:apache noter/` # others)
 
-`chown www-data notes/log/badlog.txt`
+`chown www-data noter/log/badlog.txt`
 
-`chmod 600 notes/log/badlog.txt`
+`chmod 600 noter/log/badlog.txt`
 
-Very important for the SQLite file operation:
+Very important for the SQLite file operation (needs to be actioned on the directory itself):
 
-`chown -R www-data notes/db/`
+`chown -R www-data noter/db/`
 
-Check the configuration file constants: *config/config.php*
+Check the configuration file constants: *noter/config/config.php*
 
 Only the timezone, session constants, and `CONFIG_NUM_NOTES_DISPLAYED` are of immediate interest, unless you wish to revise the SQLite database schema.
 
-Change the users and passwords in the editing log-in gateway (*classes/login.class.php*). The default usernames (`USER1` and `USER2`) are *martin* and *alison*, and both passwords are *P@55w0rd*. More users can be easily added (top of the file and in `validateForm()`).
+Change the users and passwords in the editing log-in gateway (*classes/login.class.php*). The default usernames (`USER1` and `USER2`) are *martin* and *alison*, and both passwords are *P@55w0rd*. More users can be easily added (at the top of the file and in `validateForm()`).
 
-Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a hash generated from a web service or by command-line scripting:
+Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a hash generated from a web service or by running the following in a terminal and copying the output hash:
 
 *PHP*
 
 `php -r "echo hash('sha256', 'PASSWORD');"`
 
-*Python 2 and 3*
+*Python*
 
-`import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())`
+`python -c "import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())"`
+
+`python3 -c "import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())"`
 
 *Bash*
 
@@ -78,9 +80,9 @@ Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a
 
 Noter includes an initial SQLite database: *db/noter.sqlite3*
 
-However, where GitHub importing does not permit binary files and this file is consequently missing, the SQLite file will need to be created manually -
+However, where GitHub importing does not permit binary files and the noter.sqlite3 file is consequently missing, the file will need to be created manually -
 
-On the terminal:
+In the terminal:
 
 `cd db/`
 
@@ -95,22 +97,22 @@ On the terminal:
 
 ## Viewing and Searching
 
-*http://localhost/notes*
+*http://localhost/noter*
 
-*http://IP_addr/notes*
+*http://IP.add.re.ss/noter*
 
-or better, configure an Apache vhost:
+or better, configure an Apache VHost:
 
-*notes*
+*noter*
 
 
 ## Adding and Editing
 
-*http://localhost/notes/edit*
+*http://localhost/noter/edit*
 
 or if Apache rewrite is disabled:
 
-*http://localhost/notes/edit.php*
+*http://localhost/noter/edit.php*
 
 Upon logging-in through this page, notes can be added, updated, or deleted.
 
