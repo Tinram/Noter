@@ -59,7 +59,7 @@ Only the timezone, session constants, and `CONFIG_NUM_NOTES_DISPLAYED` are of im
 
 Change the users and passwords in the editing log-in gateway (*classes/login.class.php*). The default usernames (`USER1` and `USER2`) are *martin* and *alison*, and both passwords are *P@55w0rd*. More users can be easily added (at the top of the file and in `validateForm()`).
 
-Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a hash generated from a web service or by running the following in a terminal and copying the output hash:
+Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a hash generated from a website service or by running the following in a terminal and copying the output hash:
 
 *PHP*
 
@@ -82,7 +82,7 @@ Noter includes an initial SQLite database: *db/noter.sqlite3*
 
 However, where GitHub importing does not permit binary files and the noter.sqlite3 file is consequently missing, the file will need to be created manually -
 
-In the terminal:
+In a terminal:
 
 `cd db/`
 
@@ -116,7 +116,11 @@ or if Apache rewrite is disabled:
 
 Upon logging-in through this page, notes can be added, updated, or deleted.
 
-`<pre>...</pre>` tags preserve whitespace for code snippets.
+`<pre>`...`</pre>` and `<code>`...`</code>` tags can be used to highlight code snippets.
+
+`<pre>`...`</pre>` preserves whitespace (both spaces and copy/pasted tabs).
+
+`<code>`...`</code>` does not preserve whitespace.
 
 
 ## Other Files
