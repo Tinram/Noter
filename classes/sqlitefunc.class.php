@@ -7,7 +7,7 @@ final class SQLiteFunc extends SQLA {
 		*
 		* @author         Martin Latter <copysense.co.uk>
 		* @copyright      Martin Latter 03/04/2015
-		* @version        0.33
+		* @version        0.34
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git
 	*/
@@ -104,7 +104,7 @@ final class SQLiteFunc extends SQLA {
 
 				$sOut .= '
 				<div class="ntitle">' . Helpers::webSafe($aNote['title']) . '</div>
-				<div class="nbody">' . Helpers::webSafe($aNote['body']) . '</div>
+				<div class="nbody">' . ((strpos($aNote['body'], '<pre>') === FALSE) ? str_replace(["\n", "\r\n"], '<br>', Helpers::webSafe($aNote['body'])) : Helpers::webSafe($aNote['body'])) . '</div>
 				<div class="nts">' . $aNote['create_ts'] . ' by ' . $aNote['creator'] . '</div>';
 
 				if ( ! is_null($aNote['update_ts'])) {
@@ -322,7 +322,7 @@ final class SQLiteFunc extends SQLA {
 
 			$sOut .= '
 			<div class="ntitle">' . Helpers::webSafe($aRow['title']) . '</div>
-			<div class="nbody">' . Helpers::webSafe($aRow['body']) . '</div>
+			<div class="nbody">' . ((strpos($aRow['body'], '<pre>') === FALSE) ? str_replace(["\n", "\r\n"], '<br>', Helpers::webSafe($aRow['body'])) : Helpers::webSafe($aRow['body'])) . '</div>
 			<div class="nts">' . $aRow['create_ts'] . ' by ' . $aRow['creator'] . '</div>';
 
 			if ( ! is_null($aRow['update_ts'])) {
