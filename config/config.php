@@ -19,8 +19,8 @@ define('CONFIG_TABLE', 'notes');
 ## APP
 ##################################################
 define('CONFIG_NUM_NOTES_DISPLAYED', 7);
-define('CONFIG_MAX_TITLE_LEN', 30);
-define('CONFIG_MAX_BODY_LEN', 512);
+define('CONFIG_MAX_TITLE_LEN', 80);
+define('CONFIG_MAX_BODY_LEN', 8192);
 define('TIMEZONE', 'Europe/London');
 define('CONFIG_APP_NAME', 'Noter');
 ##################################################
