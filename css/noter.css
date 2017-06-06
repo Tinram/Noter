@@ -13,7 +13,7 @@ a {text-decoration:none; display:block; font-weight:bold; color:#000;}
 a:hover {text-decoration:underline;}
 a:focus {outline:none;}
 a#index:visited {color:#000;}
-a#edit {font-size:12px; font-weight:normal; position:absolute; top:2px; left:54px;}
+a#edit {font-size:14px; font-weight:normal; position:absolute; top:0px; left:54px;}
 a#edit:hover {text-decoration:none;}
 
 /* form containers */
@@ -32,13 +32,14 @@ form input, textarea {font:1.0em verdana,arial,helvetica,freesans,sans-serif; fl
 input[type="submit"] {color:#444; background:#f7ffff; font-weight:bold; text-align:center; margin-top:5px; padding-bottom:2px; height:26px; background:linear-gradient(to bottom, #ffffff, #d5b4b4 100%);}
 input[type="submit"]:hover {background:#966; color:#fff; cursor:pointer;}
 input::-moz-focus-inner {border:0;}
-input#term {float:left;}
+input#term {float:left; width:170px;}
 input#searchbut {width:60px; position:relative; top:-5px; margin-left:2px; float:right;}
 
 /* output */
 div#notecont {clear:both;}
-div.ntitle {font-size:1.2em; margin:0 0 4px 0;}
-div.nbody {font-size:1.0em; color:#444; margin:0 0 20px 0;}
+div#notecont a {font-weight:normal; color:#000040; display:inline;}
+div.ntitle {font-size:1.1em; font-weight:bold; color:#111; margin:0 0 4px 0;}
+div.nbody {font-size:1.0em; color:#222; margin:0 0 20px 0;}
 div.nts {font-size:0.7em; color:#999; margin:-16px 0 20px 0;}
 
 /* add */
