@@ -7,7 +7,7 @@ final class SQLiteFunc extends SQLA {
 		*
 		* @author         Martin Latter <copysense.co.uk>
 		* @copyright      Martin Latter 03/04/2015
-		* @version        0.34
+		* @version        0.35
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git
 	*/
@@ -163,8 +163,8 @@ final class SQLiteFunc extends SQLA {
 		}
 
 		# quotes break form values on output
-		$sTitle = str_ireplace('"', '&quot;', $sTitle);
-		$sBody = str_ireplace('"', '&quot;', $sBody);
+		$sTitle = str_replace('"', '&quot;', $sTitle);
+		$sBody = str_replace('"', '&quot;', $sBody);
 
 		# check for existing note
 		$aResult = [];
@@ -184,6 +184,10 @@ final class SQLiteFunc extends SQLA {
 			return [ FALSE, 'Title already exists!<br><small>"' . Helpers::webSafe($aResult['title']) . '"<small>' ];
 		}
 		##
+
+		# format most URLs
+		$sURL = '@(http(s)?)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^‌​,.\s])@'; # credit: Andrew Ellis
+		$sBody = preg_replace($sURL, '<a href="http$2://$4" target="_blank">$0</a>', $sBody);
 
 		$sInsert = '
 			INSERT INTO ' . $this->sTableName . '
@@ -232,9 +236,16 @@ final class SQLiteFunc extends SQLA {
 			return [ FALSE, 'Input data is too long!' ];
 		}
 
-		# quotes break the form values on output
-		$sTitle = str_ireplace('"', '&quot;', $sTitle);
-		$sBody = str_ireplace('"', '&quot;', $sBody);
+		# raw quotes break the form values on output
+		$sTitle = str_replace('"', '&quot;', $sTitle);
+		$sBody = str_replace('"', '&quot;', $sBody);
+
+		# remove quote entities from links, which otherwise corrupt the links
+		$sBody = preg_replace('<a href=&quot;(.+)&quot; target=&quot;_blank&quot;>', '<a href="$1" target="_blank">', $sBody);
+
+		# remove characters in textareas caused by raw quotes on links
+		$sBody = str_replace('<<', '<', $sBody);
+		$sBody = str_replace('>>', '>', $sBody);
 
 		$sUpdate = '
 			UPDATE ' . $this->sTableName . '

@@ -10,7 +10,7 @@ class Helpers {
 		*
 		* @author         Martin Latter <copysense.co.uk>
 		* @copyright      Martin Latter 03/04/2015
-		* @version        0.31
+		* @version        0.32
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git
 */
@@ -130,21 +130,21 @@ class Helpers {
 		$sRadio = '	<label>{CHOICE}</label><input type="radio" name="choice" value="{CHOICE}" checked>';
 
 		if ($bDefault) {
-			$sOut .= str_ireplace('{CHOICE}', 'title', $sRadio);
+			$sOut .= str_replace('{CHOICE}', 'title', $sRadio);
 		}
 		else {
-			$sTemp = str_ireplace('{CHOICE}', 'title', $sRadio);
-			$sTemp = str_ireplace(' checked', '', $sTemp);
+			$sTemp = str_replace('{CHOICE}', 'title', $sRadio);
+			$sTemp = str_replace(' checked', '', $sTemp);
 			$sOut .= $sTemp;
 		}
 
 		if ( ! $bBody) {
-			$sTemp = str_ireplace('{CHOICE}', 'body', $sRadio);
-			$sTemp = str_ireplace(' checked', '', $sTemp);
+			$sTemp = str_replace('{CHOICE}', 'body', $sRadio);
+			$sTemp = str_replace(' checked', '', $sTemp);
 			$sOut .= $sTemp;
 		}
 		else {
-			$sOut .= str_ireplace('{CHOICE}', 'body', $sRadio);
+			$sOut .= str_replace('{CHOICE}', 'body', $sRadio);
 		}
 
 		return $sOut;
@@ -154,7 +154,7 @@ class Helpers {
 
 	/**
 		* Sanitize strings from most (not all) XSS.
-		* Preserve <pre> and <code> tags.
+		* Preserve <pre>, <code>, <a> tags.
 		*
 		* @param   string $sTainted
 		*
@@ -163,7 +163,7 @@ class Helpers {
 
 	public static function webSafe($sTainted) {
 
-		$sClean = htmlentities(strip_tags(trim($sTainted), '<pre><code>'), ENT_QUOTES, self::ENCODING);
+		$sClean = htmlentities(strip_tags(trim($sTainted), '<pre><code><a>'), ENT_QUOTES, self::ENCODING);
 
 		return html_entity_decode($sClean);
 }
