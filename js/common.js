@@ -20,6 +20,11 @@ window.addEventListener("load", function() {
 	}
 
 
+	if (document.getElementById("faddcont")) {
+		document.getElementById("title").focus();
+	}
+
+
 	if (document.getElementById("complete")) {
 		document.getElementById("complete").className = "fade";
 	}
