@@ -122,6 +122,8 @@ Upon logging-in through this page, notes can be added, updated, or deleted.
 
 `<code>`...`</code>` does not preserve whitespace.
 
+Most types of link references will be automatically converted into HTML links upon note addition (but not on note updating).
+
 
 ## Other Files
 
@@ -135,6 +137,8 @@ Unsuccessful log-in attempts are recorded in *log/badlog.txt*
 ### Credits
 
 Angel Marin and Paul Johnston for the JavaScript SHA-256 hash function.
+
+Andrew Ellis for the link regex.
 
 
 ### Miscellaneous
