@@ -1,7 +1,11 @@
 
 # Noter
 
-### Note sharing on an internal network
+### Note sharing on an internal network.
+
+
+[1]: https://tinram.github.io/images/noter.png
+![noter][1]
 
 
 ## Purpose
@@ -39,19 +43,18 @@ In the terminal:
 
 `cd` to the web directory (usually */var/www/html/*).
 
-(Prefix `sudo` to the following commands as necessary.)
+Prefix `sudo` to the following commands as necessary:
 
-`chown -R <username>:www-data noter/` # Debian-based, username as owner allows file editing
+    chown -R <username>:www-data noter/ # Debian-based, username as owner allows file editing
+    (chown -R <username>:apache noter/ # CentOS)
 
-(`chown -R <username>:apache noter/` # others)
+    chown www-data noter/log/badlog.txt
 
-`chown www-data noter/log/badlog.txt`
-
-`chmod 600 noter/log/badlog.txt`
+    chmod 600 noter/log/badlog.txt
 
 Very important for the SQLite file operation (needs to be actioned on the directory itself):
 
-`chown -R www-data noter/db/`
+    chown -R www-data noter/db/
 
 Check the configuration file constants: *noter/config/config.php*
 
@@ -59,21 +62,21 @@ Only the timezone, session constants, and `CONFIG_NUM_NOTES_DISPLAYED` are of im
 
 Change the users and passwords in the editing log-in gateway (*classes/login.class.php*). The default usernames (`USER1` and `USER2`) are *martin* and *alison*, and both passwords are *P@55w0rd*. More users can be easily added (at the top of the file and in `validateForm()`).
 
-Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a hash generated from a website service or by running the following in a terminal and copying the output hash:
-
-*PHP*
-
-`php -r "echo hash('sha256', 'PASSWORD');"`
-
-*Python*
-
-`python -c "import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())"`
-
-`python3 -c "import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())"`
+Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a hash generated from a website service or by running one of the following commands in a terminal and copying the output hash:
 
 *Bash*
 
-`echo -n 'PASSWORD' | sha256sum`
+    echo -n 'PASSWORD' | sha256sum
+
+*PHP*
+
+    php -r "echo hash('sha256', 'PASSWORD');"
+
+*Python*
+
+    python -c "import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())"
+
+    python3 -c "import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())"
 
 
 ### Manually Create the SQLite Database
@@ -84,15 +87,11 @@ However, where GitHub importing does not permit binary files and the noter.sqlit
 
 In a terminal:
 
-`cd db/`
-
-`sudo sqlite3 noter.sqlite3`
-
-`.read noter_schema_data.sql`
-
-`.exit`
-
-`sudo chown www-data:www-data noter.sqlite3`
+    cd db/
+    sudo sqlite3 noter.sqlite3
+    .read noter_schema_data.sql
+    .exit
+    sudo chown www-data:www-data noter.sqlite3
 
 
 ## Viewing and Searching
@@ -101,7 +100,7 @@ In a terminal:
 
 *http://IP.add.re.ss/noter*
 
-or better, configure an Apache VHost:
+or better, configure an Apache vhost:
 
 *noter*
 
