@@ -13,7 +13,7 @@ final class LoginGateway {
 		*
 		* @author            Martin Latter <copysense.co.uk>
 		* @copyright         Martin Latter 11/07/2012
-		* @version           1.08
+		* @version           1.09
 		* @license           GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link              https://github.com/Tinram/noter.git
 */
@@ -63,17 +63,28 @@ final class LoginGateway {
 		session_start();
 
 		$this->bSubmitted = (isset($_POST['submit_check'])) ? TRUE : FALSE;
+		$sBytes = NULL;
+		$sBytesLen = 128;
 
 		if ( ! isset($_SESSION['sKey'])) {
 
-			$sBytes = mcrypt_create_iv(128, MCRYPT_DEV_URANDOM);
+			# seek crypto-secure random bytes for session key
+			if (function_exists('random_bytes')) {
+				$sBytes = random_bytes($sBytesLen);
+			}
+			else if (function_exists('openssl_random_pseudo_bytes')) {
+				$sBytes = openssl_random_pseudo_bytes($sBytesLen);
+			}
+			else if (function_exists('mcrypt_create_iv')) {
+				$sBytes = mcrypt_create_iv($sBytesLen, MCRYPT_DEV_URANDOM);
+			}
+			##
 
-			if ($sBytes) {
+			if ( ! is_null($sBytes)) {
 				$_SESSION['sKey'] = hash(self::HASH, $sBytes);
 			}
-			else {
+			else { # worst fallback case: uniqid() is not crypto-secure
 				$_SESSION['sKey'] = hash(self::HASH, uniqid(mt_rand(), TRUE));
-				# uniqid() is not crypto-secure, mcrypt_create_iv() above is for concise Windows support
 			}
 		}
 
