@@ -18,22 +18,28 @@ The focus is simplicity - browser display and search, with a log-in to add, edit
 
 The log-in offers basic protection from unauthorised tampering via password obfuscation and session timeout. Noter was created for an isolated network where plain text transfer and viewing is acceptable, and without determined adversaries. *Noter is NOT suitable for storing sensitive data.*
 
-A single SQLite database file facilitates easy backup and / or source control of data.
+A single SQLite database file facilitates easy backup, transfer, and source control of data.
 
 A Raspberry Pi, with Apache and PHP installed, could make an ideal low-powered always-on host for Noter.
 
 
 ## Requirements
 
-A PHP 5.4+ server with the following PHP modules enabled:
+A PHP server with the following modules enabled:
 
-+ php5-mcrypt
+### PHP 7.0+
+
++ sqlite3
+
+### PHP 5.4+
+
 + php5-sqlite
++ openssl
 
 
 ## Setup
 
-Unzip or git clone the Noter files into the chosen web server directory.
+`Unzip` or `git clone` the Noter files into the chosen web server directory.
 
 (XAMPP and WAMP are suitable servers for Windows.)
 
@@ -83,7 +89,7 @@ Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a
 
 Noter includes an initial SQLite database: *db/noter.sqlite3*
 
-However, where GitHub importing does not permit binary files and the noter.sqlite3 file is consequently missing, the file will need to be created manually -
+However, where GitHub importing does not permit binary files and the *noter.sqlite3* file is consequently missing, the file will need to be created manually -
 
 In a terminal:
 
@@ -135,9 +141,9 @@ Unsuccessful log-in attempts are recorded in *log/badlog.txt*
 
 ### Credits
 
-Angel Marin and Paul Johnston for the JavaScript SHA-256 hash function.
++ Angel Marin and Paul Johnston for the JavaScript SHA-256 hash function.
 
-Andrew Ellis for the link regex.
++ Andrew Ellis for the link regex.
 
 
 ### Miscellaneous
