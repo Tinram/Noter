@@ -7,7 +7,7 @@ final class SQLiteFunc extends SQLA {
 		*
 		* @author         Martin Latter <copysense.co.uk>
 		* @copyright      Martin Latter 03/04/2015
-		* @version        0.35
+		* @version        0.36
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git
 	*/
@@ -86,6 +86,40 @@ final class SQLiteFunc extends SQLA {
 
 
 	/**
+		* Get note details from note id.
+		*
+		* @param  string $sID, note id
+		* @param  string $sAction, page action
+		*
+		* @return  array [ boolean, string message/HTML ]
+	*/
+
+	public function getID($sID, $sAction) {
+
+		$aResults = [];
+
+		$sQuery = '
+			SELECT id, title, body
+			FROM ' . $this->sTableName . '
+			WHERE id = :id';
+
+		$oStmt = $this->prepare($sQuery);
+		$oStmt->bindValue(':id', $sID, SQLITE3_TEXT);
+		$rResult = $oStmt->execute();
+		$aResults[0] = $rResult->fetchArray(SQLITE3_ASSOC);
+		$rResult->finalize();
+
+		if ( ! $aResults[0]) {
+			return [ FALSE, 'Note not found.' ];
+		}
+		else {
+			return [ TRUE, $this->generateHTML($aResults, $sAction) ];
+		}
+
+	} # end getID()
+
+
+	/**
 		* Generate results HTML.
 		*
 		* @param   array $aNotes, note row data
@@ -105,7 +139,13 @@ final class SQLiteFunc extends SQLA {
 				$sOut .= '
 				<div class="ntitle">' . Helpers::webSafe($aNote['title']) . '</div>
 				<div class="nbody">' . ((strpos($aNote['body'], '<pre>') === FALSE) ? str_replace(["\n", "\r\n"], '<br>', Helpers::webSafe($aNote['body'])) : Helpers::webSafe($aNote['body'])) . '</div>
-				<div class="nts">' . $aNote['create_ts'] . ' by ' . $aNote['creator'] . '</div>';
+				<div class="nts">' . $aNote['create_ts'] . ' by ' . $aNote['creator'];
+
+				if (isset($_SESSION['sVerifiedName'])) {
+					$sOut .= ' <span class="ud"><a href="update.php?id=' . Helpers::webSafe($aNote['id']) . '">upd</a> <a href="delete.php?id=' . Helpers::webSafe($aNote['id']) . '">del</a></span>';
+				}
+
+				$sOut .= '</div>';
 
 				if ( ! is_null($aNote['update_ts'])) {
 					$sOut .= '
@@ -322,7 +362,7 @@ final class SQLiteFunc extends SQLA {
 		$sOut = '';
 
 		$sQuery = '
-			SELECT title, body, creator, create_ts, updater, update_ts
+			SELECT id, title, body, creator, create_ts, updater, update_ts
 			FROM ' . $this->sTableName . '
 			ORDER BY id DESC
 			LIMIT ' . $this->iNumNotesDisplayed;
@@ -334,7 +374,13 @@ final class SQLiteFunc extends SQLA {
 			$sOut .= '
 			<div class="ntitle">' . Helpers::webSafe($aRow['title']) . '</div>
 			<div class="nbody">' . ((strpos($aRow['body'], '<pre>') === FALSE) ? str_replace(["\n", "\r\n"], '<br>', Helpers::webSafe($aRow['body'])) : Helpers::webSafe($aRow['body'])) . '</div>
-			<div class="nts">' . $aRow['create_ts'] . ' by ' . $aRow['creator'] . '</div>';
+			<div class="nts">' . $aRow['create_ts'] . ' by ' . $aRow['creator'];
+
+			if (isset($_SESSION['sVerifiedName'])) {
+				$sOut .= ' <span class="ud"><a href="update.php?id=' . Helpers::webSafe($aRow['id']) . '">upd</a> <a href="delete.php?id=' . Helpers::webSafe($aRow['id']) . '">del</a></span>';
+			}
+
+			$sOut .= '</div>';
 
 			if ( ! is_null($aRow['update_ts'])) {
 				$sOut .= '

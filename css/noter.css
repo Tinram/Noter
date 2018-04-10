@@ -1,7 +1,7 @@
 
 /**
 	* Stylesheet for Noter.
-	* @link     https://github.com/Tinram/noter.git
+	* @link    https://github.com/Tinram/noter.git
 */
 
 html * {margin:0; padding:0;}
@@ -41,6 +41,9 @@ div#notecont a {font-weight:normal; color:#000040; display:inline;}
 div.ntitle {font-size:1.1em; font-weight:bold; color:#111; margin:0 0 4px 0;}
 div.nbody {font-size:1.0em; color:#222; margin:0 0 20px 0;}
 div.nts {font-size:0.7em; color:#999; margin:-16px 0 20px 0;}
+div.nts span {margin-left:8px;}
+div.nts span a + a {margin-left:4px;}
+div.nts a {color:#66c !important;}
 
 /* add */
 div#faddcont {margin:0 0 50px 0;}

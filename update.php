@@ -52,6 +52,17 @@ else if (isset($_POST['edit_flag'])) {
 		}
 	}
 }
+else if (isset($_GET['id'])) {
+
+	$aResults = $oNote->getID($_GET['id'], 'update');
+
+	if ($aResults[0]) {
+		echo $aResults[1];
+	}
+	else {
+		echo '<p class="error">' . $aResults[1] . '</p>';
+	}
+}
 
 ?>
 
