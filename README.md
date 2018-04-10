@@ -1,7 +1,7 @@
 
 # Noter
 
-### Note sharing on an internal network.
+#### Note sharing on an internal network.
 
 
 [1]: https://tinram.github.io/images/noter.png
@@ -10,7 +10,7 @@
 
 ## Purpose
 
-Share notes and code on a home / internal network without awkward PC connections or Internet transfer obstructing.
+Share notes and code via a browser on a home / internal network without awkward PC connections or Internet transfer obstructing.
 
 Quickly post and view notes on the same network e.g. save a note from a Linux PC and read on a Windows PC, without needing to invoke WinSCP or use network sharing such as Samba or NFS.
 
@@ -39,7 +39,7 @@ A PHP server with the following modules enabled:
 
 ## Setup
 
-`Unzip` or `git clone` the Noter files into the chosen web server directory.
+`Unzip` or `git clone` the Noter repo files into the chosen web server directory.
 
 (XAMPP and WAMP are suitable servers for Windows.)
 
@@ -89,7 +89,7 @@ Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a
 
 Noter includes an initial SQLite database: *db/noter.sqlite3*
 
-However, where GitHub importing does not permit binary files and the *noter.sqlite3* file is consequently missing, the file will need to be created manually -
+However, where GitHub importing does not permit binary files (e.g. [PHPClasses](https://www.phpclasses.org) and the *noter.sqlite3* file is consequently missing, the file will need to be created manually -
 
 In a terminal:
 
