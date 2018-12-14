@@ -14,7 +14,7 @@ Share notes and code via a browser on a home / internal network without awkward 
 
 Quickly post and view notes on the same network e.g. save a note from a Linux PC and read on a Windows PC, without needing to invoke WinSCP or use network sharing such as Samba or NFS.
 
-The focus is simplicity - browser display and search, with a log-in to add, edit, and delete notes.
+The focus is simplicity &ndash; browser display and search, with a log-in to add, edit, and delete notes.
 
 The log-in offers basic protection from unauthorised tampering via password obfuscation and session timeout. Noter was created for an isolated network where plain text transfer and viewing is acceptable, and without determined adversaries. *Noter is NOT suitable for storing sensitive data.*
 
@@ -51,16 +51,31 @@ In the terminal:
 
 Prefix `sudo` to the following commands as necessary:
 
-    chown -R <username>:www-data noter/ # Debian-based, username as owner allows file editing
-    (chown -R <username>:apache noter/ # CentOS)
+```bash
+    chown -R <username>:www-data noter/
+```
 
+(Debian-based)
+
+```bash
+    chown -R <username>:apache noter/
+```
+
+(CentOS)
+
+```bash
     chown www-data noter/log/badlog.txt
+```
 
+```bash
     chmod 600 noter/log/badlog.txt
+```
 
-Very important for the SQLite file operation (needs to be actioned on the directory itself):
+Very important for the SQLite file operation (requires actioning on the directory itself):
 
+```bash
     chown -R www-data noter/db/
+```
 
 Check the configuration file constants: *noter/config/config.php*
 
@@ -72,32 +87,39 @@ Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a
 
 *Bash*
 
+```bash
     echo -n 'PASSWORD' | sha256sum
+```
 
 *PHP*
 
+```bash
     php -r "echo hash('sha256', 'PASSWORD');"
+```
 
 *Python*
 
+```python
     python -c "import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())"
 
     python3 -c "import hashlib;print(hashlib.sha256('PASSWORD'.encode()).hexdigest())"
-
+```
 
 ### Manually Create the SQLite Database
 
 Noter includes an initial SQLite database: *db/noter.sqlite3*
 
-However, where GitHub importing does not permit binary files (e.g. [PHPClasses](https://www.phpclasses.org) and the *noter.sqlite3* file is consequently missing, the file will need to be created manually -
+However, where GitHub importing does not permit binary files (e.g. [PHPClasses](https://www.phpclasses.org) and the *noter.sqlite3* file is consequently missing, the file will need to be created manually &ndash;
 
 In a terminal:
 
+```bash
     cd db/
     sudo sqlite3 noter.sqlite3
     .read noter_schema_data.sql
     .exit
     sudo chown www-data:www-data noter.sqlite3
+```
 
 
 ## Viewing and Searching
@@ -141,9 +163,9 @@ Unsuccessful log-in attempts are recorded in *log/badlog.txt*
 
 ### Credits
 
-+ Angel Marin and Paul Johnston for the JavaScript SHA-256 hash function.
++ Angel Marin and Paul Johnston &ndash; JavaScript SHA-256 hash function.
 
-+ Andrew Ellis for the link regex.
++ Andrew Ellis &ndash; link regex.
 
 
 ### Miscellaneous
