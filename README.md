@@ -49,21 +49,21 @@ e.g.
 
     sudo git clone https://github.com/Tinram/Noter.git
 
-    sudo chown -R <username>:www-data noter/
+    sudo chown -R <username>:www-data Noter/
 ```
 
 (Debian-based; use `apache` instead of `www-data` for Red Hat-based distros)
 
 ```bash
-    sudo chown www-data noter/log/badlog.txt
+    sudo chown www-data Noter/log/badlog.txt
 
-    sudo chmod 600 noter/log/badlog.txt
+    sudo chmod 600 Noter/log/badlog.txt
 ```
 
 SQLite file operation (requires actioning on the directory itself):
 
 ```bash
-    sudo chown -R www-data noter/db/
+    sudo chown -R www-data Noter/db/
 ```
 
 Check the configuration file constants: *config/config.php*
@@ -113,22 +113,22 @@ In a terminal:
 
 ## Viewing and Searching
 
-*http://localhost/noter*
+*http://localhost/Noter*
 
-*http://IP.add.re.ss/noter*
+*http://IP.add.re.ss/Noter*
 
 or better, configure an Apache vhost and access with:
 
-*noter*
+*Noter*
 
 
 ## Adding and Editing
 
-*http://localhost/noter/edit*
+*http://localhost/Noter/edit*
 
 or if Apache rewrite is disabled:
 
-*http://localhost/noter/edit.php*
+*http://localhost/Noter/edit.php*
 
 Upon logging-in through this page, notes can be added, updated, or deleted.
 
