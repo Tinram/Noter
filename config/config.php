@@ -2,8 +2,8 @@
 
 /**
 	* Configuration file of constants for noter.
-	* @author   Martin Latter <copysense.co.uk>
-	* @link     https://github.com/Tinram/noter.git
+	* @author  Martin Latter
+	* @link    https://github.com/Tinram/noter.git
 */
 
 

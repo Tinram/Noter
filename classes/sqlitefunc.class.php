@@ -5,7 +5,7 @@ final class SQLiteFunc extends SQLA {
 	/**
 		* SQLite application functionality.
 		*
-		* @author         Martin Latter <copysense.co.uk>
+		* @author         Martin Latter
 		* @copyright      Martin Latter 03/04/2015
 		* @version        0.36
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
