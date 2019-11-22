@@ -392,6 +392,6 @@ final class SQLiteFunc extends SQLA {
 
 	} # end lastNotesEntered()
 
-} # end {}
+}
 
 ?>
