@@ -10,7 +10,7 @@ class Helpers {
 		*
 		* @author         Martin Latter
 		* @copyright      Martin Latter 03/04/2015
-		* @version        0.33
+		* @version        0.34
 		* @license        GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link           https://github.com/Tinram/noter.git
 	*/
@@ -29,12 +29,13 @@ class Helpers {
 
 	public static function validateUser() {
 
-		ini_set('session.use_strict_mode', '1'); # PHP v.5.52+
-		ini_set('session.use_only_cookies', '1');
-		ini_set('session.cookie_httponly', '1');
+		ini_set('session.use_only_cookies', 'On');
+		ini_set('session.use_strict_mode', 'On'); # PHP v.5.52+
+		ini_set('session.use_trans_sid', 'Off');
+		ini_set('session.cookie_httponly', 'On');
 		ini_set('session.cookie_lifetime', (string) self::SESSION_TIMEOUT);
-		//ini_set('session.cookie_secure', '1'); # enable if on HTTPS
-		ini_set('session.use_trans_sid', '0');
+		//ini_set('session.cookie_secure', 'On'); # enable if on HTTPS
+		//ini_set('session.cookie_samesite', 'Strict'); # PHP v.7.3+
 		ini_set('session.gc_divisor', '5');
 		ini_set('session.gc_maxlifetime', (string) self::SESSION_TIMEOUT);
 		ini_set('session.cache_expire', (string) self::CACHE_EXPIRY);

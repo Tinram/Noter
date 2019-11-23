@@ -13,7 +13,7 @@ final class LoginGateway {
 		*
 		* @author            Martin Latter
 		* @copyright         Martin Latter 11/07/2012
-		* @version           1.11
+		* @version           1.12
 		* @license           GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
 		* @link              https://github.com/Tinram/noter.git
 */
@@ -50,12 +50,14 @@ final class LoginGateway {
 	private function init() {
 
 		ini_set('date.timezone', 'Europe/London');
-		ini_set('session.use_strict_mode', '1'); # PHP v.5.52+
-		ini_set('session.use_only_cookies', '1');
-		ini_set('session.cookie_httponly', '1');
+
+		ini_set('session.use_only_cookies', 'On');
+		ini_set('session.use_strict_mode', 'On'); # PHP v.5.52+
+		ini_set('session.use_trans_sid', 'Off');
+		ini_set('session.cookie_httponly', 'On');
 		ini_set('session.cookie_lifetime', (string) self::SESSION_TIMEOUT);
-		//ini_set('session.cookie_secure', '1'); # enable if on HTTPS
-		ini_set('session.use_trans_sid', '0');
+		//ini_set('session.cookie_secure', 'On'); # enable if on HTTPS
+		//ini_set('session.cookie_samesite', 'Strict'); # PHP v.7.3+
 		ini_set('session.gc_divisor', '5');
 		ini_set('session.gc_maxlifetime', (string) self::SESSION_TIMEOUT);
 		ini_set('session.cache_limiter', 'nocache');
