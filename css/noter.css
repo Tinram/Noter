@@ -1,7 +1,7 @@
 
 /**
-	* Stylesheet for Noter.
-	* @link    https://github.com/Tinram/noter.git
+    * Stylesheet for Noter.
+    * @link    https://github.com/Tinram/noter.git
 */
 
 html * {margin:0; padding:0;}
@@ -13,7 +13,7 @@ a {text-decoration:none; display:block; font-weight:bold; color:#000;}
 a:hover {text-decoration:underline;}
 a:focus {outline:none;}
 a#index:visited {color:#000;}
-a#edit {font-size:14px; font-weight:normal; position:absolute; top:0px; left:54px;}
+a#edit {font-size:16px; font-weight:normal; position:absolute; top:0px; left:54px;}
 a#edit:hover {text-decoration:none;}
 
 /* form containers */
