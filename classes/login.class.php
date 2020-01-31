@@ -15,7 +15,7 @@ final class LoginGateway
         *
         * @author       Martin Latter
         * @copyright    Martin Latter 11/07/2012
-        * @version      1.14
+        * @version      1.15
         * @license      GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
         * @link         https://github.com/Tinram/noter.git
     */
@@ -261,9 +261,9 @@ final class LoginGateway
     <head>
         <title><?php echo CONFIG_APP_NAME; ?> Manager</title>
         <meta charset="utf-8">
-        <meta name="copyright" content="&copy; <?php echo date('Y'); ?> CopySense">
+        <meta name="copyright" content="&copy; <?php echo date('Y'); ?> Tinram">
         <link rel="stylesheet" type="text/css" href="css/noter.css">
-        <style type="text/css">
+        <style>
             form#nm {display:none;}
             form#nm div {width:125px; height:22px;}
             form#nm input {height:19px; width:120px; float:right;}
@@ -271,7 +271,7 @@ final class LoginGateway
             .error {clear:both; margin-top:40px; color:#c00;}
             p#nojs {color:#c00;}
         </style>
-        <script type="text/javascript" src="js/edit.js"></script>
+        <script src="js/edit.js"></script>
     </head>
 
     <body>
