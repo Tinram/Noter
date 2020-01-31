@@ -1,29 +1,30 @@
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function()
+{
+    document.getElementById("nojs").style.display = "none";
 
-	document.getElementById("nojs").style.display = "none";
+    var oForm = document.getElementById("nm");
+    oForm.style.display = "block";
 
-	var oForm = document.getElementById("nm");
-	oForm.style.display = "block";
+    if (document.getElementById("un"))
+    {
+        document.getElementById("un").focus();
+    }
 
-	if (document.getElementById("un")) {
-		document.getElementById("un").focus();
-	}
+    oForm.addEventListener("submit", function(e)
+    {
+        if (document.getElementById("un").value === "" || document.getElementById("pw").value === "")
+        {
+            document.getElementById("jserrors").innerHTML = "Both fields are required!";
+            e.preventDefault();
+        }
+        else
+        {
+            var oPw = document.getElementById("pw");
+            oPw.value = SHA256(SHA256(oPw.value) + document.getElementById("pk").value);
+        }
 
-	oForm.addEventListener("submit", function(e) {
-
-		if (document.getElementById("un").value === "" || document.getElementById("pw").value === "") {
-
-			document.getElementById("jserrors").innerHTML = "Both fields are required!";
-			e.preventDefault();
-		}
-		else {
-
-			var oPw = document.getElementById("pw");
-			oPw.value = SHA256(SHA256(oPw.value) + document.getElementById("pk").value);
-		}
-
-	}, false);
+    }, false);
 
 }, false);
 
