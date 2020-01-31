@@ -27,16 +27,9 @@ A Raspberry Pi, with Apache and PHP installed, could make an ideal low-powered a
 
 ## Requirements
 
-A PHP server with the following modules enabled:
-
-### PHP 7.0+
+A PHP server running version 7.2+ with the following module enabled:
 
 + sqlite3
-
-### PHP 5.4+
-
-+ php5-sqlite
-+ openssl
 
 
 ## Setup
@@ -66,13 +59,14 @@ SQLite file operation (requires actioning on the directory itself):
     sudo chown -R www-data Noter/db/
 ```
 
-Check the configuration file constants: *config/config.php*
+Check the configuration file constants: *config/config.php*  
+Only the timezone, session timeouts, `CONFIG_NUM_NOTES_DISPLAYED`, and user credentials are of immediate interest.
 
-Only the timezone, session constants, and `CONFIG_NUM_NOTES_DISPLAYED` are of immediate interest, unless you wish to revise the SQLite database schema.
+Change the users and the user password hashes (`CONFIG_USER1`, `CONFIG_USER1_PASS`).  
+The default users are *martin* and *alison*, and both passwords are *P@55w0rd*.  
+(More users can be added here, and editing the relevant locations in *classes/login.class.php*.)
 
-Change the users and passwords in the editing log-in gateway (*classes/login.class.php*). The default usernames (`USER1` and `USER2`) are *martin* and *alison*, and both passwords are *P@55w0rd*. More users can be easily added (at the top of the file and in `validateForm()`).
-
-Passwords are stored as SHA-256 hashes. `$USER1_PASS` etc can be replaced with a hash generated from a website service or by running one of the following commands in a terminal and copying the output hash:
+Passwords are stored as SHA-256 hashes. `CONFIG_USER1_PASS` etc should be replaced with a hash generated from either a website service or by running one of the following commands in a terminal and copying the output hash:
 
 *Bash*
 
