@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 #########################################
 require('classes/sqlite.class.php');
 require('classes/sqlitefunc.class.php');
@@ -12,43 +14,44 @@ require('includes/head.php');
 
 ?>
 
-		<h1 id="indextitle">
-			<a href="index.php" id="index"><?php echo CONFIG_APP_NAME; ?></a>
-			<a href="<?php echo (isset($_SESSION['sVerifiedName'])) ? 'menu.php' : 'edit.php'; ?>" id="edit">&#9998;</a>
-		</h1>
+        <h1 id="indextitle">
+            <a href="index.php" id="index"><?php echo CONFIG_APP_NAME; ?></a>
+            <a href="<?php echo (isset($_SESSION['sVerifiedName'])) ? 'menu.php' : 'edit.php'; ?>" id="edit">&#9998;</a>
+        </h1>
 
 <?php
 Helpers::outputSearchForm();
 ?>
 
-		<div id="notecont">
+        <div id="notecont">
 
 <?php
 
 $oNote = new SQLiteFunc();
 
 
-if ( ! isset($_POST['search_flag'])) {
-	echo $oNote->lastNotesEntered();
+if ( ! isset($_POST['search_flag']))
+{
+    echo $oNote->lastNotesEntered();
 }
-else {
+else
+{
+    $aResults = $oNote->search($_POST['term'], $_POST['choice']);
 
-	$aResults = $oNote->search($_POST['term'], $_POST['choice']);
-
-	if ($aResults[0]) {
-		echo $aResults[1];
-	}
-	else {
-		echo '<p class="error">' . $aResults[1] . '</p>';
-	}
+    if ($aResults[0])
+    {
+        echo $aResults[1];
+    }
+    else
+    {
+        echo '<p class="error">' . $aResults[1] . '</p>';
+    }
 }
 
 ?>
 
-		</div>
+        </div>
 
 <?php
 
 require('includes/foot.php');
-
-?>
