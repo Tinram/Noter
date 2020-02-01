@@ -1,23 +1,22 @@
 /*
-	Create noter.sqlite3 database using the following commands:
+    Create noter.sqlite3 database using the following commands:
 
-		sudo sqlite3 noter.sqlite3
-		.read noter_schema_data.sql
-		.exit
+    sudo sqlite3 noter.sqlite3
+    .read noter_schema_data.sql
+    .exit
 */
 
 
 -- Table: notes
-CREATE TABLE notes (
-
-	id					INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-	title				TEXT							NOT NULL DEFAULT (''),
-	body				TEXT							NOT NULL DEFAULT (''),
-	creator			TEXT							NOT NULL DEFAULT (''),
-	create_ts		DATETIME					NOT NULL DEFAULT (DATETIME('now', 'localtime')),
-	updater			TEXT							NOT NULL DEFAULT (''),
-	update_ts		DATETIME					DEFAULT NULL
-
+CREATE TABLE notes
+(
+    id              INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    title           TEXT                 NOT NULL DEFAULT (''),
+    body            TEXT                 NOT NULL DEFAULT (''),
+    creator         TEXT                 NOT NULL DEFAULT (''),
+    create_ts       DATETIME             NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+    updater         TEXT                 NOT NULL DEFAULT (''),
+    update_ts       DATETIME             DEFAULT NULL
 );
 
 
@@ -27,12 +26,14 @@ INSERT INTO [notes] ([id], [title], [body], [creator], [create_ts]) VALUES (3, '
 
 
 -- Index: idx_title
-CREATE INDEX idx_title ON notes (
-	title COLLATE NOCASE ASC
+CREATE INDEX idx_title ON notes
+(
+    title COLLATE NOCASE ASC
 );
 
 
 -- Index: idx_body
-CREATE INDEX idx_body ON notes (
-	body COLLATE NOCASE
+CREATE INDEX idx_body ON notes
+(
+    body COLLATE NOCASE
 );
