@@ -12,7 +12,7 @@ class Helpers
         *
         * @author       Martin Latter
         * @copyright    Martin Latter 03/04/2015
-        * @version      0.35
+        * @version      0.36
         * @license      GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
         * @link         https://github.com/Tinram/noter.git
     */
@@ -133,15 +133,15 @@ class Helpers
     public static function generateRadioButtons(): string
     {
         $sOut = '';
-        $bDefault = TRUE;
-        $bBody = FALSE;
+        $bDefault = true;
+        $bBody = false;
 
         if (isset($_POST['choice']))
         {
             if ($_POST['choice'] === 'body')
             {
-                $bBody = TRUE;
-                $bDefault = FALSE;
+                $bBody = true;
+                $bDefault = false;
             }
         }
 
