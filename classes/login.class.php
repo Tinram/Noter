@@ -15,7 +15,7 @@ final class LoginGateway
         *
         * @author       Martin Latter
         * @copyright    Martin Latter 11/07/2012
-        * @version      1.15
+        * @version      1.16
         * @license      GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
         * @link         https://github.com/Tinram/noter.git
     */
@@ -259,8 +259,9 @@ final class LoginGateway
 <html lang="en">
 
     <head>
-        <title><?php echo CONFIG_APP_NAME; ?> Manager</title>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title><?php echo CONFIG_APP_NAME; ?> Manager</title>
         <meta name="copyright" content="&copy; <?php echo date('Y'); ?> Tinram">
         <link rel="stylesheet" type="text/css" href="css/noter.css">
         <style>
