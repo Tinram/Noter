@@ -15,7 +15,7 @@ final class LoginGateway
         *
         * @author       Martin Latter
         * @copyright    Martin Latter 11/07/2012
-        * @version      1.16
+        * @version      1.17
         * @license      GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
         * @link         https://github.com/Tinram/noter.git
     */
@@ -68,7 +68,7 @@ final class LoginGateway
         ini_set('date.timezone', 'Europe/London');
 
         ini_set('session.use_only_cookies', 'On');
-        ini_set('session.use_strict_mode', 'On'); /* PHP v.5.52+ */
+        ini_set('session.use_strict_mode', 'On');
         ini_set('session.use_trans_sid', 'Off');
         ini_set('session.cookie_httponly', 'On');
         ini_set('session.cookie_lifetime', (string) self::SESSION_TIMEOUT);
@@ -86,6 +86,7 @@ final class LoginGateway
 
         $this->bSubmitted = (isset($_POST['submit_check'])) ? true : false;
         $sBytes = '';
+        $sNonce = '';
         $sBytesLen = 128;
 
         if ( ! isset($_SESSION['sKey']))
@@ -94,23 +95,28 @@ final class LoginGateway
             if (function_exists('random_bytes'))
             {
                 $sBytes = random_bytes($sBytesLen);
+                $sNonce = random_bytes($sBytesLen);
             }
             else if (function_exists('openssl_random_pseudo_bytes'))
             {
                 $sBytes = openssl_random_pseudo_bytes($sBytesLen);
+                $sNonce = openssl_random_pseudo_bytes($sBytesLen);
             }
             else if (function_exists('mcrypt_create_iv'))
             {
                 $sBytes = mcrypt_create_iv($sBytesLen, MCRYPT_DEV_URANDOM);
+                $sNonce = mcrypt_create_iv($sBytesLen, MCRYPT_DEV_URANDOM);
             }
 
             if ($sBytes !== '')
             {
                 $_SESSION['sKey'] = hash(self::HASH, $sBytes);
+                $_SESSION['sLoginNonce'] = hash(self::HASH, $sNonce);
             }
             else /* worst fallback case: uniqid() is not crypto-secure */
             {
                 $_SESSION['sKey'] = hash(self::HASH, uniqid('', true));
+                $_SESSION['sLoginNonce'] = hash(self::HASH, uniqid('', true));
             }
         }
 
@@ -209,7 +215,9 @@ final class LoginGateway
             else
             {
                 $_SESSION['sVerifiedName'] = $sUserName;
-                $_SESSION['iToken'] = time();
+                $_SESSION['sLoginToken'] = hash(self::HASH, $_SESSION['sVerifiedName'] . $_SESSION['sLoginNonce']);
+                $_SESSION['iLastClick'] = time();
+                $_SESSION['sBrowser'] = hash(self::HASH, $_SERVER['HTTP_USER_AGENT']);
             }
         }
 

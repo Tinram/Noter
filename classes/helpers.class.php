@@ -12,7 +12,7 @@ class Helpers
         *
         * @author       Martin Latter
         * @copyright    Martin Latter 03/04/2015
-        * @version      0.36
+        * @version      0.37
         * @license      GNU GPL version 3.0 (GPL v3); http://www.gnu.org/licenses/gpl.html
         * @link         https://github.com/Tinram/noter.git
     */
@@ -27,6 +27,9 @@ class Helpers
     /** @const string CONFIG_ENCODING */
     const ENCODING = CONFIG_ENCODING;
 
+    /** @const string HASH */
+    const HASH = CONFIG_HASH;
+
 
     /**
         * Validate user access for editing pages.
@@ -37,7 +40,7 @@ class Helpers
     public static function validateUser(): void
     {
         ini_set('session.use_only_cookies', 'On');
-        ini_set('session.use_strict_mode', 'On'); /* PHP v.5.52+ */
+        ini_set('session.use_strict_mode', 'On');
         ini_set('session.use_trans_sid', 'Off');
         ini_set('session.cookie_httponly', 'On');
         ini_set('session.cookie_lifetime', (string) self::SESSION_TIMEOUT);
@@ -52,17 +55,33 @@ class Helpers
 
         session_start();
 
-        if ( ! isset($_SESSION['iToken']) || ! isset($_SESSION['sVerifiedName']))
+        if ( ! isset($_SESSION['sVerifiedName']))
         {
             self::sessionDeath();
             die('<p style="color:#c00;font-weight:bold;"><a href="index.php">' . CONFIG_APP_NAME . ':</a> no access authorisation!</p>');
         }
 
-        if (time() > ($_SESSION['iToken'] + (self::CACHE_EXPIRY * 60)))
+        if (time() > ($_SESSION['iLastClick'] + (self::CACHE_EXPIRY * 60)))
         {
             self::sessionDeath();
             die('<a href="index.php">' . CONFIG_APP_NAME . ':</a> session expired.');
         }
+
+        if ($_SESSION['sLoginToken'] !== hash(self::HASH, $_SESSION['sVerifiedName'] . $_SESSION['sLoginNonce']))
+        {
+            self::sessionDeath();
+            exit;
+        }
+
+        # check browser hash for session hijack
+        if ($_SESSION['sBrowser'] !== hash(self::HASH, $_SERVER['HTTP_USER_AGENT']))
+        {
+            self::sessionDeath();
+            exit;
+        }
+
+        $_SESSION['iLastClick'] = time();
+        setcookie(session_name(), '', time() + self::CACHE_EXPIRY * 60);
     }
 
 
