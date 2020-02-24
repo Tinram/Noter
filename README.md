@@ -1,7 +1,7 @@
 
 # Noter
 
-#### Share notes across devices on a local network.
+### Share notes across devices on a local network.
 
 
 [1]: https://tinram.github.io/images/noter.png
@@ -10,7 +10,7 @@
 
 ## Purpose
 
-+ Share notes easily across devices and operating systems on a local network.
++ Share notes easily across different devices and operating systems on a local network.
 
 + Avoid awkward device connections, network shares, or Internet transfer.
 
@@ -27,9 +27,7 @@ A Raspberry Pi, with Apache and PHP installed, could make an ideal low-powered a
 
 ## Requirements
 
-A PHP server running version 7.2+ with the following module enabled:
-
-+ sqlite3
++ PHP server with version 7.2+ and sqlite3 module enabled
 
 
 ## Setup
@@ -146,16 +144,16 @@ Unsuccessful log-in attempts are recorded in *log/badlog.txt*
 
 ## Credits
 
-+ Angel Marin and Paul Johnston &ndash; JavaScript SHA-256 hash function.
++ Angel Marin and Paul Johnston: JavaScript SHA-256 hash function.
 
-+ Andrew Ellis &ndash; link regex.
++ Andrew Ellis: link regex.
 
 
 ## Miscellaneous
 
 Noter was originally created as a second language flashcard viewer (to which it can be easily reverted).
 
-Noter was never coded for elegance, merely to do a simple job in minimal code. It's like my car: looks ancient, runs quite well.
+Noter was never created for coding elegance, merely to do a simple job in minimal code. It's like my car: looks ancient, runs quite well.
 
 
 ## License
