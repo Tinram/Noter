@@ -31,7 +31,7 @@ require('includes/head.php');
                 </div>
 
                 <input type="hidden" name="add_flag">
-                <input type="submit" value="add">
+                <input type="submit" value="add" class="clear">
 
             </form>
 

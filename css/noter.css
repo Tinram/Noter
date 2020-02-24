@@ -31,6 +31,7 @@ div#radiocont input {float:none;}
 form input, textarea {font:1.0em verdana,arial,helvetica,freesans,sans-serif; float:right; border:1px solid #ccc; border-radius:5px; background:#d5b4b4; padding:2px; background:linear-gradient(to top, #d5b4b4, #ffffff 80%); height:20px;}
 input[type="submit"] {color:#444; background:#f7ffff; font-weight:bold; text-align:center; margin-top:5px; padding-bottom:2px; height:26px; background:linear-gradient(to bottom, #ffffff, #d5b4b4 100%);}
 input[type="submit"]:hover {background:#966; color:#fff; cursor:pointer;}
+input[type="submit"].clear {clear:both;}
 input::-moz-focus-inner {border:0;}
 input#term {float:left; width:170px;}
 input#searchbut {width:60px; position:relative; top:-5px; margin-left:2px; float:right;}
